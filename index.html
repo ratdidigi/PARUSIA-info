@@ -776,6 +776,80 @@ padding-bottom:58px;
 </style>
 
 
+
+<style id="revelation-image-slot-style">
+.revelation-copy{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.revelation-image-slot{
+  margin-top:26px;
+  width:100%;
+  min-height:360px;
+  border:1px solid rgba(199,168,106,.24);
+  background:
+    radial-gradient(circle at 50% 42%,rgba(199,168,106,.08),transparent 36%),
+    linear-gradient(145deg,rgba(216,13,27,.045),transparent 55%),
+    #0b0a09;
+  position:relative;
+  overflow:hidden;
+}
+
+.revelation-image-slot:before{
+  content:"ARCHIVE IMAGE / EMPTY";
+  position:absolute;
+  left:18px;
+  bottom:16px;
+  z-index:1;
+  font:600 8px var(--mono);
+  letter-spacing:.14em;
+  color:#625b50;
+}
+
+.revelation-image-slot:after{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid rgba(199,168,106,.10);
+  pointer-events:none;
+}
+
+.revelation-image-slot.has-image:before{
+  display:none;
+}
+
+.revelation-image-slot img{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  min-height:360px;
+  display:block;
+  object-fit:cover;
+}
+
+@media(max-width:930px){
+  .revelation-image-slot{
+    min-height:320px;
+  }
+  .revelation-image-slot img{
+    min-height:320px;
+  }
+}
+
+@media(max-width:600px){
+  .revelation-image-slot{
+    min-height:240px;
+    margin-top:20px;
+  }
+  .revelation-image-slot img{
+    min-height:240px;
+  }
+}
+</style>
+
 </head>
 <body>
   <div class="mobile-top"><a class="brand" style="margin:0" href="#" data-page="archive"><span class="sigil"></span>PARUSIA</a><button class="menu-toggle" id="menuToggle">MENU</button></div>
@@ -804,7 +878,7 @@ padding-bottom:58px;
 
       <section class="intro-text"><div class="wrap reveal"><div class="intro-box"><div class="intro-label">PROLOGUE / WORLD RECORD</div><p>사람들은 오래도록 신을 믿었고, 악마를 두려워했으며, 이름 없는 공포에 수없이 많은 얼굴을 붙여왔다. 그리고 어느 날부터 그 관념들은 현실의 법칙이 되어 되돌아오기 시작했다. 누군가는 그것을 계시라 불렀고, 누군가는 재앙이라 불렀다. 아직 도시는 밝고 사람들은 숨을 쉰다. 다만, 세상의 끝은 이미 시작되었다...</p></div></div></section>
 
-      <section><div class="wrap reveal"><div class="section-head"><div class="section-index">01 / REVELATION</div><div><h2 class="section-title">계시현상과 <em>현현체</em></h2><p class="lead">인간이 오랜 세월 믿어온 관념이 현실의 법칙을 획득하는 현상. 종교적 상징뿐 아니라 죽음, 전쟁, 질병, 죄책감, 탐욕, 사랑, 고독, 도시전설, 집단적 공포와 미신까지도 현현의 기원이 된다.</p></div></div><div class="split"><div class="manifesto">현현체는 <span class="outline">괴물</span>의 형태일 수도, 사람일 수도, 건축물·목소리·의식·공간 자체일 수도 있다. 중요한 것은 형상이 아니라 그것이 강제하는 <span class="red">규칙</span>이다.</div><div class="timeline"><div class="time-item"><div class="year">1980</div><div><h3>최초 관측</h3><p>세계 각지에서 기존 과학으로 설명할 수 없는 국지적 계시현상이 보고되기 시작한다.</p></div></div><div class="time-item"><div class="year">1996</div><div><h3>L.A.M.B. 설립</h3><p>회원국 공동출자로 조직된 초국가 기관. 조사·격리·소거 및 국제적 사건 통제를 담당한다.</p></div></div><div class="time-item"><div class="year">1999</div><div><h3>대휴거 <span class="hanja">大携擧</span></h3><p>세계 주요 도시에 현현체가 동시다발적으로 출몰. 이후 계시현상의 빈도와 규모가 뚜렷하게 증가한다.</p></div></div><div class="time-item"><div class="year">2036</div><div><h3>현재</h3><p>스마트폰, SNS, 인터넷과 현대 국가는 여전히 작동한다. 다만 일부 지역은 이미 되돌릴 수 없는 휴거구역이 되었다.</p></div></div></div></div></div></section>
+      <section><div class="wrap reveal"><div class="section-head"><div class="section-index">01 / REVELATION</div><div><h2 class="section-title">계시현상과 <em>현현체</em></h2><p class="lead">인간이 오랜 세월 믿어온 관념이 현실의 법칙을 획득하는 현상. 종교적 상징뿐 아니라 죽음, 전쟁, 질병, 죄책감, 탐욕, 사랑, 고독, 도시전설, 집단적 공포와 미신까지도 현현의 기원이 된다.</p></div></div><div class="split"><div class="revelation-copy"><div class="manifesto">현현체는 <span class="outline">괴물</span>의 형태일 수도, 사람일 수도, 건축물·목소리·의식·공간 자체일 수도 있다. 중요한 것은 형상이 아니라 그것이 강제하는 <span class="red">규칙</span>이다.</div><div class="revelation-image-slot" id="revelationImageSlot"><!-- 사진을 넣으려면 아래 주석을 풀고 경로만 바꾸면 됨: <img src="images/revelation_01.jpg" alt="계시현상 기록 이미지"> --></div></div><div class="timeline"><div class="time-item"><div class="year">1980</div><div><h3>최초 관측</h3><p>세계 각지에서 기존 과학으로 설명할 수 없는 국지적 계시현상이 보고되기 시작한다.</p></div></div><div class="time-item"><div class="year">1996</div><div><h3>L.A.M.B. 설립</h3><p>회원국 공동출자로 조직된 초국가 기관. 조사·격리·소거 및 국제적 사건 통제를 담당한다.</p></div></div><div class="time-item"><div class="year">1999</div><div><h3>대휴거 <span class="hanja">大携擧</span></h3><p>세계 주요 도시에 현현체가 동시다발적으로 출몰. 이후 계시현상의 빈도와 규모가 뚜렷하게 증가한다.</p></div></div><div class="time-item"><div class="year">2036</div><div><h3>현재</h3><p>스마트폰, SNS, 인터넷과 현대 국가는 여전히 작동한다. 다만 일부 지역은 이미 되돌릴 수 없는 휴거구역이 되었다.</p></div></div></div></div></div></section>
 
       <section><div class="wrap reveal"><div class="section-head"><div class="section-index">02 / DOGMA</div><div><h2 class="section-title">교리 <em>Dogma</em></h2><p class="lead">모든 현현체는 자신을 탄생시킨 관념에서 비롯된 고유한 교리를 가진다. 교리는 단순한 초능력이 아니라 일정 범위 안에서 현실보다 우선하는 절대 규칙이다.</p></div></div><div class="dogma-board"><div class="dogma-aside"><div class="big">D.</div><p>강력한 현현체는 일반적인 물리 공격만으로 완전히 제거할 수 없다. 살아남기 위해서는 먼저 규칙을 읽어야 한다.</p></div><div class="dogma-steps"><div class="step"><div class="num">01</div><div><h4>행동 관측</h4><p>현현체의 반응, 반복 행동, 피해 양상, 공간 변화와 금기를 기록한다.</p></div></div><div class="step"><div class="num">02</div><div><h4>기원 관념 추론</h4><p>종교·민속·언어·역사·도시전설 등과 대조해 어떤 관념에서 태어났는지 좁혀간다.</p></div></div><div class="step"><div class="num">03</div><div><h4>조건·모순·허점 발견</h4><p>교리가 작동하기 위한 조건과 스스로 충돌하는 예외를 찾아낸다.</p></div></div><div class="step"><div class="num">04</div><div><h4>교리 붕괴</h4><p>확인된 허점을 이용해 현현체의 규칙을 무력화하고 최종 격퇴한다.</p></div></div></div></div></div></section>
 
@@ -975,47 +1049,47 @@ padding-bottom:58px;
     // 새 프로필을 배열에 객체 하나만 추가하면 카드/슬롯 수가 자동으로 늘어남.
     const LAMB_MEMBERS=[
       {
-        codename:'SABLE',name:'율리안 바이스 Julian Weiss',age:'33',department:'EDEN 전담반',rank:'섹션 치프',
+        codename:'SABLE',name:'—',age:'33',department:'EDEN 전담반',rank:'섹션 치프',
         nationality:'오스트리아 / 빈',role:'현장 지휘 · 작전 통솔. 모든 범위를 커버하는 올라운더 플렉시블 요원.',
         weapon:'범용 카빈 및 돌격소총. 보조권총. 교리병장 나이프.',languages:'영어 / 라틴어 / 독일어',
         features:'191cm. 백발 하이 포니테일, 분홍색 눈. 나른하고 권태로운 인상.',
-        image:'images/profile_sable.png',gallery:['images/thumbnail_sable.png']
+        image:'images/profile_sable.png',gallery:[]
       },
       {
-        codename:'ASTRA',name:'노아 캘러한 Noah Callahan',age:'27',department:'EDEN 전담반',rank:'선임 요원',
+        codename:'ASTRA',name:'—',age:'27',department:'EDEN 전담반',rank:'선임 요원',
         nationality:'미국 / 캘리포니아',role:'매복 · 정찰 · 장거리 지원',
         weapon:'지정사수소총 및 권총 사용. 별도의 교리병장 할당 무기 없음.',languages:'영어 / 라틴어',
         features:'187cm. 금발 울프컷, 민트색 눈. 왼쪽 다리를 현현체로 대체해 평소 은닉.',
-        image:'images/profile_astra.png',gallery:['images/thumbnail_astra.png']
+        image:'images/profile_astra.png',gallery:[]
       },
       {
-        codename:'ORDO',name:'에밀 마이어 Emil Meier',age:'23',department:'EDEN 전담반',rank:'신입 요원',
+        codename:'ORDO',name:'—',age:'23',department:'EDEN 전담반',rank:'신입 요원',
         nationality:'스위스 / 베른',role:'현장 지원 · 교리 대응',
         weapon:'권총 및 교리병장-성탄건 사용(강한 빛을 터트려 시야를 방해하는 총기)',languages:'영어 / 라틴어 / 독일어',
         features:'188cm. 베이지 브라운 숏컷, 옅은 푸른 눈. 초연하고 엄격한 성향.',
-        image:'images/profile_ordo.png',gallery:['images/thumbnail_ordo.png']
+        image:'images/profile_ordo.png',gallery:[]
       },
       {
-        codename:'CAIN',name:'정우진 鄭宇鎭/穽雨燼',age:'27',department:'EDEN 전담반',rank:'선임 요원',
+        codename:'CAIN',name:'—',age:'27',department:'EDEN 전담반',rank:'선임 요원',
         nationality:'대한민국 / 서울',role:'현장 전투 · 추적',
         weapon:'초장거리 저격소총 및 성유물로 등록된 활 사용.',languages:'영어 / 라틴어 / 한국어',
         features:'184cm. 흑발, 회색 눈, 왼쪽 눈 안대. 유쾌하고 느긋한 태도.',
-        image:'images/profile_cain.png',gallery:['images/thumbnail_cain.png']
+        image:'images/profile_cain.png',gallery:[]
       },
       {
-        codename:'MORI',name:'쿠로사와 렌지 黒沢 蓮司',age:'29',department:'현현체처리반',rank:'섹션 치프',
+        codename:'MORI',name:'—',age:'29',department:'현현체처리반',rank:'섹션 치프',
         nationality:'일본 / 나가노현',role:'현장 조사 · 토착신앙/의례 분석',
         weapon:'단축 산탄총 카빈, 오래된 신목 가지를 가공한 단도형 성유물.',languages:'영어 / 라틴어 / 일본어',
         features:'긴 땋은 흑발. 음침하고 말이 더딘 편. 사람보다 장소와 습관을 먼저 관찰하는 현장형.',
-        image:'images/profile_mori.png',gallery:['images/thumbnail_mori.png']
+        image:'images/profile_mori.png',gallery:[]
       },
       {
-        codename:'NAGA',name:'나린 찬타라 Narin Chantara',age:'25',department:'현현체처리반',rank:'선임 요원',
+        codename:'NAGA',name:'—',age:'25',department:'현현체처리반',rank:'선임 요원',
         nationality:'태국 / 농카이',role:'현장 조사 · 현장 안정화 · 경계 설정',
         weapon:'컴팩트 기관단총 / 보조 권총 / 성유물 단봉',
         languages:'영어 / 라틴어 / 태국어',
         features:'152cm. 옅은 분홍 웨이브, 금안. 부적·방울·매듭·목패 등 현장도구 휴대.',
-        image:'images/profile_naga.png',gallery:['images/thumbnail_naga.png']
+        image:'images/profile_naga.png',gallery:[]
       }
     ];
 
@@ -1427,7 +1501,7 @@ padding-bottom:58px;
       if(!boardConfigured){showSetupMessage();return;}
       if(!window.supabase){
         setBoardState('DATABASE / LIBRARY ERROR','err');
-        $('postList').innerHTML='<div class="setup-card"><b>SUPABASE LIBRARY FAILED TO LOAD</b>네트워크 연결 후 다시 열어주세요..</div>';
+        $('postList').innerHTML='<div class="setup-card"><b>SUPABASE LIBRARY FAILED TO LOAD</b>네트워크 연결 후 다시 열어주세요.</div>';
         return;
       }
       db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
