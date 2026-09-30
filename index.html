@@ -686,10 +686,16 @@ padding-bottom:58px;
 
 
 
+
 <style id="member-auto-profile-style">
+.member-slot{
+  padding:0!important;
+  min-height:300px;
+}
+
 .member-slot .portrait{
   position:absolute;
-  inset:0 0 72px;
+  inset:0;
   overflow:hidden;
 }
 
@@ -700,45 +706,75 @@ padding-bottom:58px;
   display:block;
 }
 
-/* 프로필 텍스트 영역이 이미지 위로 살짝 겹치며 자연스럽게 어두워짐 */
-.member-slot .member-meta{
-  position:relative;
-  z-index:3;
-  margin:-42px -20px -20px;
-  padding:44px 20px 18px!important;
-  border-top:0!important;
+/* 이미지 위 하단 그라데이션 — 별도의 검은 네모 영역 없음 */
+.member-slot .portrait::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:46%;
   background:linear-gradient(
-    to bottom,
-    rgba(8,8,8,0) 0%,
-    rgba(8,8,8,.18) 20%,
-    rgba(8,8,8,.62) 48%,
-    rgba(8,8,8,.92) 72%,
-    #080808 100%
+    to top,
+    rgba(7,7,7,.98) 0%,
+    rgba(7,7,7,.90) 24%,
+    rgba(7,7,7,.62) 48%,
+    rgba(7,7,7,.24) 72%,
+    rgba(7,7,7,0) 100%
   );
+  pointer-events:none;
+}
+
+/* 텍스트는 이미지 위에 직접 배치 */
+.member-slot .member-meta{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:17px;
+  z-index:3;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
 }
 
 .member-slot .member-meta:before{
   content:"✦";
   float:right;
   color:var(--gold);
-  opacity:.45;
+  opacity:.55;
+  margin-top:9px;
 }
 
 .member-slot .member-meta b{
   display:block;
   color:var(--paper-light);
-  text-shadow:0 2px 8px rgba(0,0,0,.95);
+  font:800 18px/1.05 var(--serif);
+  text-shadow:0 2px 10px rgba(0,0,0,1);
 }
 
 .member-slot .member-meta span{
   display:block;
+  margin-bottom:4px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  color:#aaa!important;
-  text-shadow:0 2px 6px rgba(0,0,0,.95);
+  color:#d0c8ba!important;
+  text-shadow:0 2px 8px rgba(0,0,0,1);
+}
+
+/* 이미지 없는 카드도 기존 분위기 유지 */
+.member-slot .portrait:not(:has(img)){
+  background:
+    radial-gradient(circle at 50% 40%,rgba(199,168,106,.10),transparent 32%),
+    #0b0a09;
+}
+
+@media(max-width:600px){
+  .member-slot .portrait::after{height:42%}
 }
 </style>
+
 
 </head>
 <body>
@@ -939,47 +975,47 @@ padding-bottom:58px;
     // 새 프로필을 배열에 객체 하나만 추가하면 카드/슬롯 수가 자동으로 늘어남.
     const LAMB_MEMBERS=[
       {
-        codename:'SABLE',name:'—',age:'33',department:'EDEN 전담반',rank:'섹션 치프',
+        codename:'SABLE',name:'율리안 바이스 Julian Weiss',age:'33',department:'EDEN 전담반',rank:'섹션 치프',
         nationality:'오스트리아 / 빈',role:'현장 지휘 · 작전 통솔. 모든 범위를 커버하는 올라운더 플렉시블 요원.',
         weapon:'범용 카빈 및 돌격소총. 보조권총. 교리병장 나이프.',languages:'영어 / 라틴어 / 독일어',
         features:'191cm. 백발 하이 포니테일, 분홍색 눈. 나른하고 권태로운 인상.',
-        image:'images/profile_sable.png',gallery:[]
+        image:'images/profile_sable.png',gallery:['images/thumbnail_sable.png']
       },
       {
-        codename:'ASTRA',name:'—',age:'27',department:'EDEN 전담반',rank:'선임 요원',
+        codename:'ASTRA',name:'노아 캘러한 Noah Callahan',age:'27',department:'EDEN 전담반',rank:'선임 요원',
         nationality:'미국 / 캘리포니아',role:'매복 · 정찰 · 장거리 지원',
         weapon:'지정사수소총 및 권총 사용. 별도의 교리병장 할당 무기 없음.',languages:'영어 / 라틴어',
         features:'187cm. 금발 울프컷, 민트색 눈. 왼쪽 다리를 현현체로 대체해 평소 은닉.',
-        image:'images/profile_astra.png',gallery:[]
+        image:'images/profile_astra.png',gallery:['images/thumbnail_astra.png']
       },
       {
-        codename:'ORDO',name:'—',age:'23',department:'EDEN 전담반',rank:'신입 요원',
+        codename:'ORDO',name:'에밀 마이어 Emil Meier',age:'23',department:'EDEN 전담반',rank:'신입 요원',
         nationality:'스위스 / 베른',role:'현장 지원 · 교리 대응',
         weapon:'권총 및 교리병장-성탄건 사용(강한 빛을 터트려 시야를 방해하는 총기)',languages:'영어 / 라틴어 / 독일어',
         features:'188cm. 베이지 브라운 숏컷, 옅은 푸른 눈. 초연하고 엄격한 성향.',
-        image:'images/profile_ordo.png',gallery:[]
+        image:'images/profile_ordo.png',gallery:['images/thumbnail_ordo.png']
       },
       {
-        codename:'CAIN',name:'—',age:'27',department:'EDEN 전담반',rank:'선임 요원',
+        codename:'CAIN',name:'정우진 鄭宇鎭/穽雨燼',age:'27',department:'EDEN 전담반',rank:'선임 요원',
         nationality:'대한민국 / 서울',role:'현장 전투 · 추적',
         weapon:'초장거리 저격소총 및 성유물로 등록된 활 사용.',languages:'영어 / 라틴어 / 한국어',
         features:'184cm. 흑발, 회색 눈, 왼쪽 눈 안대. 유쾌하고 느긋한 태도.',
-        image:'images/profile_cain.png',gallery:[]
+        image:'images/profile_cain.png',gallery:['images/thumbnail_cain.png']
       },
       {
-        codename:'MORI',name:'—',age:'29',department:'현현체처리반',rank:'섹션 치프',
+        codename:'MORI',name:'쿠로사와 렌지 黒沢 蓮司',age:'29',department:'현현체처리반',rank:'섹션 치프',
         nationality:'일본 / 나가노현',role:'현장 조사 · 토착신앙/의례 분석',
         weapon:'단축 산탄총 카빈, 오래된 신목 가지를 가공한 단도형 성유물.',languages:'영어 / 라틴어 / 일본어',
         features:'긴 땋은 흑발. 음침하고 말이 더딘 편. 사람보다 장소와 습관을 먼저 관찰하는 현장형.',
-        image:'images/profile_mori.png',gallery:[]
+        image:'images/profile_mori.png',gallery:['images/thumbnail_mori.png']
       },
       {
-        codename:'NAGA',name:'—',age:'25',department:'현현체처리반',rank:'선임 요원',
+        codename:'NAGA',name:'나린 찬타라 Narin Chantara',age:'25',department:'현현체처리반',rank:'선임 요원',
         nationality:'태국 / 농카이',role:'현장 조사 · 현장 안정화 · 경계 설정',
         weapon:'컴팩트 기관단총 / 보조 권총 / 성유물 단봉',
         languages:'영어 / 라틴어 / 태국어',
         features:'152cm. 옅은 분홍 웨이브, 금안. 부적·방울·매듭·목패 등 현장도구 휴대.',
-        image:'images/profile_naga.png',gallery:[]
+        image:'images/profile_naga.png',gallery:['images/thumbnail_naga.png']
       }
     ];
 
@@ -1199,7 +1235,7 @@ padding-bottom:58px;
     async function uploadAndInsertImage(file){
       if(!admin || !db)return alert('ADMIN LOGIN REQUIRED');
       if(!file.type.startsWith('image/'))return alert('IMAGE FILE ONLY');
-      if(file.size>8*1024*1024)return alert('이미지는 8MB 이하만 업로드할 수 있어.');
+      if(file.size>8*1024*1024)return alert('이미지는 8MB 이하만 업로드할 수 있습니다.');
       setUploadState('UPLOADING...');
       const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
       const path=`${currentUser.id}/${Date.now()}_${safeName}`;
@@ -1323,7 +1359,7 @@ padding-bottom:58px;
       const {data:posts,error}=await db.from('posts').select('id,title,content,content_html,category,created_at').order('created_at',{ascending:false});
       if(error){
         setBoardState('DATABASE / ERROR','err');
-        $('postList').innerHTML=`<div class="setup-card"><b>DATABASE ERROR</b>${escapeHtml(error.message)}<br><br>게시판 확장용 SQL 마이그레이션을 실행했는지 확인해줘.</div>`;
+        $('postList').innerHTML=`<div class="setup-card"><b>DATABASE ERROR</b>${escapeHtml(error.message)}<br><br>게시판 확장용 SQL 마이그레이션을 실행했는지 확인해주세요.</div>`;
         return;
       }
       cachedPosts=posts||[];
@@ -1384,14 +1420,14 @@ padding-bottom:58px;
     function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
     function showSetupMessage(){
       setBoardState('DATABASE / SETUP REQUIRED','err');
-      $('postList').innerHTML='<div class="setup-card"><b>SUPABASE SETUP REQUIRED</b>HTML 하단의 <code>SUPABASE_PUBLISHABLE_KEY</code>만 채우고 <code>supabase_setup.sql</code>을 Supabase SQL Editor에서 실행하면 게시판이 온라인으로 전환된다.</div>';
+      $('postList').innerHTML='<div class="setup-card"><b>SUPABASE SETUP REQUIRED</b>HTML 하단의 <code>SUPABASE_PUBLISHABLE_KEY</code>만 채우고 <code>supabase_setup.sql</code>을 Supabase SQL Editor에서 실행하면 게시판이 온라인으로 전환됩니다.</div>';
     }
 
     async function initBoard(){
       if(!boardConfigured){showSetupMessage();return;}
       if(!window.supabase){
         setBoardState('DATABASE / LIBRARY ERROR','err');
-        $('postList').innerHTML='<div class="setup-card"><b>SUPABASE LIBRARY FAILED TO LOAD</b>네트워크 연결 후 다시 열어줘.</div>';
+        $('postList').innerHTML='<div class="setup-card"><b>SUPABASE LIBRARY FAILED TO LOAD</b>네트워크 연결 후 다시 열어주세요..</div>';
         return;
       }
       db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
