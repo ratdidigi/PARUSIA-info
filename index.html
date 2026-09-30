@@ -291,7 +291,126 @@
   }
 }
 </style>
+<style id="dense-type-pass">
+/* 전체적으로 활자 밀도 높이기 */
+body{
+line-height:1.55;
+letter-spacing:-.015em;
+}
 
+/* 일반 설명문 */
+.hero-copy,
+.category-desc,
+.lead,
+.card p,
+.weapon p,
+.time-item p,
+.step p,
+.eden-copy p,
+.meta-table,
+.hq-brief p,
+.hq-level span{
+line-height:1.55!important;
+letter-spacing:-.025em;
+}
+
+/* 큰 제목도 살짝 더 꽉 차게 */
+.hero h1,
+.section-title,
+.category-title,
+.org-name,
+.eden-copy h2,
+.footer-title{
+letter-spacing:-.075em!important;
+}
+
+/* 본문 문서 느낌 */
+.article-content{
+line-height:1.65!important;
+letter-spacing:-.035em!important;
+font-size:15px;
+}
+
+.article-content p{
+margin:.45em 0!important;
+}
+
+.article-content h2{
+margin:1.05em 0 .35em!important;
+letter-spacing:-.045em;
+}
+
+.article-content h3{
+margin:.85em 0 .3em!important;
+letter-spacing:-.035em;
+}
+
+.article-content ul,
+.article-content ol{
+margin:.45em 0!important;
+padding-left:1.4em;
+}
+
+.article-content li{
+margin:.12em 0!important;
+}
+
+/* 글쓰기 화면도 실제 게시글과 비슷하게 */
+.rich-editor{
+line-height:1.65!important;
+letter-spacing:-.035em!important;
+}
+
+.rich-editor p{
+margin:.45em 0!important;
+}
+
+/* 프로필 정보도 조금 더 조밀하게 */
+.profile-table div{
+padding:6px 0!important;
+line-height:1.45;
+}
+
+.member-slot .member-meta{
+padding-top:8px!important;
+}
+
+.member-slot .member-meta b{
+line-height:1.15;
+}
+
+/* 섹션 제목 주변 공간 약간 감소 */
+.section-head{
+margin-bottom:32px!important;
+}
+
+section{
+padding-top:82px;
+padding-bottom:82px;
+}
+
+@media(max-width:600px){
+body{
+line-height:1.5;
+}
+
+.article-content,
+.rich-editor{
+line-height:1.58!important;
+letter-spacing:-.04em!important;
+}
+
+.article-content p,
+.rich-editor p{
+margin:.3em 0!important;
+}
+
+section{
+padding-top:58px;
+padding-bottom:58px;
+}
+}
+</style>
 </head>
 <body>
   <div class="mobile-top"><a class="brand" style="margin:0" href="#" data-page="archive"><span class="sigil"></span>PARUSIA</a><button class="menu-toggle" id="menuToggle">MENU</button></div>
