@@ -989,6 +989,180 @@ padding-bottom:58px;
 }
 </style>
 
+
+<style id="eden-history-structure-style">
+.eden-record-grid{
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+  gap:18px;
+  align-items:stretch;
+}
+.eden-history-card,
+.eden-structure-card{
+  border:1px solid rgba(199,168,106,.22);
+  background:linear-gradient(160deg,#0d0b0a,#080808);
+  padding:26px;
+  position:relative;
+  overflow:hidden;
+}
+.eden-history-card:after{
+  content:"EDEN";
+  position:absolute;
+  right:-12px;
+  bottom:-20px;
+  font:900 86px/1 var(--serif);
+  color:rgba(216,13,27,.05);
+}
+.eden-history-card .tag,
+.eden-structure-card .tag{color:var(--gold)}
+.eden-history-card h3,
+.eden-structure-card h3{
+  margin:10px 0 16px;
+  font:900 30px/1.05 var(--serif);
+  letter-spacing:-.05em;
+}
+.eden-history-line{
+  position:relative;
+  padding:0 0 22px 24px;
+  border-left:1px solid rgba(199,168,106,.2);
+}
+.eden-history-line:last-child{padding-bottom:0}
+.eden-history-line:before{
+  content:"";
+  position:absolute;
+  left:-4px;
+  top:5px;
+  width:7px;
+  height:7px;
+  background:var(--red);
+  box-shadow:0 0 0 4px rgba(216,13,27,.08);
+}
+.eden-history-year{
+  font:700 9px var(--mono);
+  letter-spacing:.11em;
+  color:var(--red);
+  margin-bottom:5px;
+}
+.eden-history-line b{
+  display:block;
+  margin-bottom:4px;
+  font:800 15px var(--serif);
+  color:var(--paper-light);
+}
+.eden-history-line p{
+  margin:0;
+  color:#9b948a;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.eden-command{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.eden-command-node{
+  width:min(480px,100%);
+  border:1px solid rgba(199,168,106,.24);
+  background:#090909;
+  padding:15px 18px;
+  text-align:center;
+  position:relative;
+}
+.eden-command-node.eve{
+  border-color:rgba(216,13,27,.55);
+  background:linear-gradient(135deg,rgba(118,8,17,.34),rgba(199,168,106,.035));
+}
+.eden-command-node .en{
+  display:block;
+  font:700 8px var(--mono);
+  letter-spacing:.16em;
+  color:var(--gold);
+  margin-bottom:4px;
+}
+.eden-command-node b{
+  display:block;
+  font:900 20px/1.15 var(--serif);
+  color:var(--paper-light);
+}
+.eden-command-node span{
+  display:block;
+  margin-top:5px;
+  color:#8f887d;
+  font-size:10px;
+  line-height:1.5;
+}
+.eden-command-line{
+  width:1px;
+  height:24px;
+  background:linear-gradient(var(--red),rgba(199,168,106,.18));
+}
+.apostle-band{
+  width:100%;
+  border:1px solid rgba(199,168,106,.30);
+  background:linear-gradient(180deg,rgba(199,168,106,.065),rgba(216,13,27,.035));
+  padding:18px;
+  text-align:center;
+  position:relative;
+}
+.apostle-band .count{
+  font:900 42px/1 var(--serif);
+  color:var(--red);
+}
+.apostle-band h4{
+  margin:4px 0 6px;
+  font:900 18px var(--serif);
+}
+.apostle-band p{
+  margin:0 auto;
+  max-width:590px;
+  color:#969087;
+  font-size:10px;
+  line-height:1.55;
+}
+.eden-subcells{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  width:100%;
+}
+.eden-cell{
+  min-height:100px;
+  padding:13px;
+  border:1px solid rgba(199,168,106,.15);
+  background:rgba(255,255,255,.012);
+}
+.eden-cell b{
+  display:block;
+  font:800 13px var(--serif);
+  margin-bottom:5px;
+  color:var(--paper-light);
+}
+.eden-cell p{
+  margin:0;
+  color:#817b73;
+  font-size:9px;
+  line-height:1.5;
+}
+.eden-structure-note{
+  margin-top:16px;
+  padding:12px 14px;
+  border-left:2px solid var(--red);
+  background:rgba(118,8,17,.08);
+  color:#9a938a;
+  font-size:10px;
+  line-height:1.6;
+}
+.eden-structure-note b{color:var(--paper)}
+@media(max-width:900px){
+  .eden-record-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .eden-history-card,.eden-structure-card{padding:19px}
+  .eden-subcells{grid-template-columns:1fr}
+}
+</style>
+
 </head>
 <body>
   <div class="mobile-top"><a class="brand" style="margin:0" href="#" data-page="archive"><span class="sigil"></span>PARUSIA</a><button class="menu-toggle" id="menuToggle">MENU</button></div>
@@ -1139,6 +1313,86 @@ padding-bottom:58px;
     <!-- EDEN PAGE -->
     <main class="page" id="page-eden">
       <section class="eden-banner"><div class="wrap eden-grid reveal"><div class="eden-word">EDEN</div><div class="eden-copy"><div class="tag">HOSTILE NETWORK / PRIORITY TARGET</div><h2>계시조직<br>EDEN</h2><p>LAMB가 최우선으로 추적하는 국제적 비밀조직. 공통된 종교나 믿음으로 움직이지 않으며, 조직원들은 저마다 다른 이유로 계시현상을 이용한다.</p><div class="eden-list"><div><b>수장</b><br>EVE라는 코드네임 외 정보 없음.</div><div><b>거점</b><br>해석되지 않은 휴거구역을 활용.</div><div><b>목표</b><br>계시현상을 의도적으로 발생·이용.</div><div><b>식별</b><br>검은 정장과 붉은 셔츠.</div><div><b>특이사항</b><br>EVE가 최초의 성유물을 보유.</div><div><b>대외정보</b><br>사건은 다른 원인으로 은폐되는 경우가 많음.</div></div></div></div></section>
+
+      <section><div class="wrap reveal">
+        <div class="section-head">
+          <div class="section-index">HISTORY / STRUCTURE</div>
+          <div>
+            <h2 class="section-title">역사와 <em>조직</em></h2>
+            <p class="lead">EDEN은 계시현상의 발생과 거의 동시에 모습을 드러낸 것으로 추정된다. 초기에는 소수의 비밀 결사에 가까웠으나, 1999년 대휴거 이후 계시현상이 급증하면서 세력과 활동 범위가 빠르게 확대되었다.</p>
+          </div>
+        </div>
+
+        <div class="eden-record-grid">
+          <article class="eden-history-card">
+            <div class="tag">HISTORICAL TRACE</div>
+            <h3>확인된 흐름</h3>
+            <div class="eden-history-line">
+              <div class="eden-history-year">1980s / ORIGIN UNKNOWN</div>
+              <b>계시현상과 함께 등장</b>
+              <p>최초의 계시현상 기록과 비슷한 시기부터 EDEN과 연결되는 사건이 확인된다. 정확한 창설 시점과 최초 구성원은 불명.</p>
+            </div>
+            <div class="eden-history-line">
+              <div class="eden-history-year">PRE-1999</div>
+              <b>소규모 비밀조직</b>
+              <p>지역 단위의 의식, 성유물 탈취, 인위적 현현 시도 등 단편적인 활동 위주. 서로 다른 사건이 하나의 조직과 연결된다는 사실조차 알려지지 않았다.</p>
+            </div>
+            <div class="eden-history-line">
+              <div class="eden-history-year">1999 / GREAT RAPTURE</div>
+              <b>대휴거 이후 급팽창</b>
+              <p>계시현상의 빈도와 규모가 증가하면서 조직원·거점·자원이 확대. 이후 국제적인 계시조직으로 분류된다.</p>
+            </div>
+            <div class="eden-history-line">
+              <div class="eden-history-year">2036 / PRESENT</div>
+              <b>분산형 국제 네트워크</b>
+              <p>단일 본부보다 여러 간부와 산하 조직을 중심으로 움직이며, 필요에 따라 조직이 합쳐지고 흩어진다.</p>
+            </div>
+          </article>
+
+          <article class="eden-structure-card">
+            <div class="tag">COMMAND / INTERNAL NETWORK</div>
+            <h3>조직 구조</h3>
+
+            <div class="eden-command">
+              <div class="eden-command-node eve">
+                <span class="en">SUPREME / EVE</span>
+                <b>수장 EVE</b>
+                <span>코드네임 외 알려진 정보가 거의 없음. 조직 전체의 최종 목적과 방향을 제시하는 존재로 추정.</span>
+              </div>
+
+              <div class="eden-command-line"></div>
+
+              <div class="apostle-band">
+                <div class="count">12</div>
+                <h4>12사도 / APOSTLES</h4>
+                <p>EVE와 직접 소통하는 최고 간부 12명. 인간과 비인간이 혼재하며, 각자 독립적인 세력·거점·작전망을 보유한다. 대부분의 명령과 정보는 이들을 통해 하부로 전달된다.</p>
+              </div>
+
+              <div class="eden-command-line"></div>
+
+              <div class="eden-subcells">
+                <div class="eden-cell">
+                  <b>직속 조직원</b>
+                  <p>특정 사도에게 직접 소속된 요원. 현장 작전, 의식 수행, 정보수집, 자원 조달 등을 담당.</p>
+                </div>
+                <div class="eden-cell">
+                  <b>지역 조직·거점</b>
+                  <p>사도 산하에서 독립적으로 운영되는 소규모 조직. 필요에 따라 다른 사도 계열과 일시적으로 협력.</p>
+                </div>
+                <div class="eden-cell">
+                  <b>협력자·외부 세력</b>
+                  <p>정식 조직원이 아니어도 계시현상 발생이라는 목적이 일치하면 일시적으로 이용하거나 연계한다.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="eden-structure-note">
+              <b>EDEN은 고정된 군대식 계급조직이 아니다.</b> 공통된 것은 ‘계시현상을 의도적으로 발생시키고 이용한다’는 방향뿐이며, 각 사도는 서로 다른 방식과 이유로 움직인다. EVE의 실체를 직접 아는 조직원이 거의 없기 때문에 실질적인 충성·귀속의 대상은 수장보다 자신이 속한 계열의 <b>12사도</b>인 경우가 많다.
+            </div>
+          </article>
+        </div>
+      </div></section>
+
       <section><div class="wrap reveal"><div class="section-head"><div class="section-index">MEMBERS / EDEN</div><div><h2 class="section-title">확인 <em>조직원</em></h2><p class="lead"></p></div></div><div class="member-grid" id="edenMembers"></div></div></section>
     </main>
 
