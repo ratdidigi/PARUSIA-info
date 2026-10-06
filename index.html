@@ -1163,6 +1163,100 @@ padding-bottom:58px;
 }
 </style>
 
+
+<style id="board-new-post-notification-style">
+.board-nav-btn{
+  display:flex!important;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.board-notice-dot{
+  display:none;
+  width:8px;
+  height:8px;
+  flex:0 0 auto;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 0 3px rgba(216,13,27,.11),0 0 12px rgba(216,13,27,.78);
+}
+.board-notice-dot.on{
+  display:block;
+  animation:boardNoticePulse 1.8s ease-in-out infinite;
+}
+@keyframes boardNoticePulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.55;transform:scale(.82)}
+}
+
+.board-new-toast{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:210;
+  width:min(360px,calc(100vw - 28px));
+  padding:16px 18px;
+  border:1px solid rgba(216,13,27,.55);
+  border-left:3px solid var(--red);
+  background:linear-gradient(135deg,rgba(24,11,12,.98),rgba(9,9,9,.98));
+  box-shadow:0 18px 60px rgba(0,0,0,.58),0 0 30px rgba(216,13,27,.08);
+  color:var(--paper);
+  display:none;
+  cursor:pointer;
+  transform:translateY(12px);
+  opacity:0;
+  transition:opacity .22s ease,transform .22s ease;
+}
+.board-new-toast.on{
+  display:block;
+  opacity:1;
+  transform:none;
+}
+.board-new-toast-kicker{
+  font:700 8px var(--mono);
+  letter-spacing:.17em;
+  color:var(--red);
+  text-transform:uppercase;
+}
+.board-new-toast-title{
+  margin-top:6px;
+  font:800 16px/1.35 var(--serif);
+  color:var(--paper-light);
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.board-new-toast-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:9px;
+  color:#827b71;
+  font:600 8px var(--mono);
+  letter-spacing:.08em;
+}
+.board-new-toast-open{color:var(--gold)}
+.board-new-toast-close{
+  position:absolute;
+  right:7px;
+  top:5px;
+  border:0;
+  background:transparent;
+  color:#756f67;
+  cursor:pointer;
+  font-size:18px;
+  line-height:1;
+}
+@media(max-width:600px){
+  .board-new-toast{
+    right:8px;
+    bottom:8px;
+    width:calc(100vw - 16px);
+  }
+}
+</style>
+
 </head>
 <body>
   <div class="mobile-top"><a class="brand" style="margin:0" href="#" data-page="archive"><span class="sigil"></span>PARUSIA</a><button class="menu-toggle" id="menuToggle">MENU</button></div>
@@ -1175,7 +1269,7 @@ padding-bottom:58px;
     <button class="nav-btn" data-page="lamb">L.A.M.B.</button>
     <button class="nav-btn" data-page="eden">EDEN</button>
     <div class="menu-label">Database</div>
-    <button class="nav-btn" data-page="board">Notice Board</button>
+    <button class="nav-btn board-nav-btn" data-page="board"><span>Notice Board</span><span class="board-notice-dot" id="boardNoticeDot" aria-label="새 게시글 있음"></span></button>
     <div class="sidebar-foot"><b>2036</b><br>PARUSIA archive<br>restricted access</div>
   </aside>
 
@@ -1426,6 +1520,13 @@ padding-bottom:58px;
 </div></div><div class="article-content" id="articleContent"></div></div></div>
 
 
+  <div class="board-new-toast" id="boardNewToast" role="status" aria-live="polite">
+    <button class="board-new-toast-close" id="boardNewToastClose" type="button" aria-label="알림 닫기">×</button>
+    <div class="board-new-toast-kicker">NEW RECORD / NOTICE BOARD</div>
+    <div class="board-new-toast-title" id="boardNewToastTitle">새 기록이 등록되었습니다.</div>
+    <div class="board-new-toast-meta"><span id="boardNewToastDate">ARCHIVE UPDATE</span><span class="board-new-toast-open">OPEN →</span></div>
+  </div>
+
   <div class="asset-lightbox" id="assetLightbox"><div class="asset-lightbox-box"><button class="asset-lightbox-close" id="assetLightboxClose">×</button><img id="assetLightboxImage" alt=""><div class="asset-lightbox-cap" id="assetLightboxCaption"></div></div></div>
 
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
@@ -1439,6 +1540,7 @@ padding-bottom:58px;
       document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
       window.scrollTo({top:0,behavior:'instant'});
       document.getElementById('sidebar').classList.remove('open');
+      if(name==='board')markBoardPostsSeen();
       setTimeout(revealVisible,20);
     }
     navButtons.forEach(el=>el.addEventListener('click',e=>{e.preventDefault();showPage(el.dataset.page)}));
@@ -1605,10 +1707,92 @@ padding-bottom:58px;
     let admin=false;
     let currentUser=null;
 
+    const BOARD_SEEN_KEY='parusia_board_last_seen_post_id';
+    let latestBoardPostId=0;
+    let latestBoardNoticePost=null;
+    let boardToastTimer=null;
+
+    function getSeenBoardPostId(){
+      try{return Number(localStorage.getItem(BOARD_SEEN_KEY)||0);}
+      catch{return 0;}
+    }
+    function setSeenBoardPostId(id){
+      try{localStorage.setItem(BOARD_SEEN_KEY,String(Number(id)||0));}
+      catch{}
+    }
+    function setBoardNoticeVisible(on){
+      const dot=$('boardNoticeDot');
+      if(dot)dot.classList.toggle('on',!!on);
+    }
+    function hideBoardToast(){
+      const toast=$('boardNewToast');
+      if(toast)toast.classList.remove('on');
+      if(boardToastTimer){clearTimeout(boardToastTimer);boardToastTimer=null;}
+    }
+    function showBoardToast(post){
+      if(!post)return;
+      latestBoardNoticePost=post;
+      $('boardNewToastTitle').textContent=post.title||'새 기록이 등록되었습니다.';
+      $('boardNewToastDate').textContent=formatPostDate(post.created_at);
+      const toast=$('boardNewToast');
+      toast.classList.add('on');
+      if(boardToastTimer)clearTimeout(boardToastTimer);
+      boardToastTimer=setTimeout(()=>toast.classList.remove('on'),9000);
+    }
+    function updateBoardNotification(posts,{silentFirstLoad=true}={}){
+      if(!posts || !posts.length)return;
+      const latest=posts[0];
+      const latestId=Number(latest.id)||0;
+      if(!latestId)return;
+      latestBoardPostId=latestId;
+
+      const seen=getSeenBoardPostId();
+      if(!seen && silentFirstLoad){
+        setSeenBoardPostId(latestId);
+        setBoardNoticeVisible(false);
+        return;
+      }
+      if(latestId>seen){
+        setBoardNoticeVisible(true);
+        showBoardToast(latest);
+      }else{
+        setBoardNoticeVisible(false);
+      }
+    }
+    function markBoardPostsSeen(){
+      if(latestBoardPostId>0)setSeenBoardPostId(latestBoardPostId);
+      setBoardNoticeVisible(false);
+      hideBoardToast();
+    }
+    async function openLatestBoardNotice(){
+      const target=latestBoardNoticePost;
+      showPage('board');
+      if(!target)return;
+      if(!cachedPosts.some(p=>Number(p.id)===Number(target.id)))await renderPosts();
+      openArticle(target.id);
+    }
+    async function checkForNewBoardPost(){
+      if(!db || document.hidden)return;
+      const {data,error}=await db.from('posts')
+        .select('id,title,created_at')
+        .order('created_at',{ascending:false})
+        .limit(1);
+      if(error || !data?.length)return;
+      updateBoardNotification(data,{silentFirstLoad:true});
+    }
+
     function setBoardState(text,type=''){
       $('boardState').textContent=text;
       $('boardState').className='board-state'+(type?' '+type:'');
     }
+    $('boardNewToast').addEventListener('click',e=>{
+      if(e.target.closest('#boardNewToastClose'))return;
+      openLatestBoardNotice();
+    });
+    $('boardNewToastClose').addEventListener('click',e=>{
+      e.stopPropagation();
+      hideBoardToast();
+    });
     function syncAdmin(){
       $('adminStatus').textContent=admin?'ADMIN MODE / ACTIVE':'ADMIN MODE / LOCKED';
       $('adminStatus').classList.toggle('on',admin);
@@ -1874,6 +2058,7 @@ padding-bottom:58px;
       }
       cachedPosts=posts||[];
       setBoardState('DATABASE / CONNECTED','ok');
+      updateBoardNotification(cachedPosts,{silentFirstLoad:true});
       paintPosts();
     }
 
@@ -1948,6 +2133,7 @@ padding-bottom:58px;
         currentUser=session?.user||null;
         setTimeout(()=>refreshAdmin(),0);
       });
+      setInterval(checkForNewBoardPost,60000);
     }
     initBoard();
   </script>
