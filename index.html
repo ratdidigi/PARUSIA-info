@@ -1588,6 +1588,22 @@ padding-bottom:58px;
 }
 </style>
 
+
+<style id="editor-width-match-style">
+/* 글쓰기 팝업 폭 = 글 읽기 팝업 폭 */
+.editor-box{
+  width:min(1080px,calc(100vw - 36px))!important;
+  max-width:none!important;
+}
+
+@media(max-width:600px){
+  .editor-box{
+    width:calc(100vw - 12px)!important;
+    max-width:none!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
