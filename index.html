@@ -1332,6 +1332,262 @@ padding-bottom:58px;
 @media(max-width:600px){.board-search{width:100%;margin-bottom:10px}}
 </style>
 
+
+<style id="eden-world-map-style">
+.eden-map-section{padding-top:72px!important}
+.eden-map-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 250px;
+  gap:18px;
+  align-items:start;
+}
+.eden-map-shell{
+  border:1px solid rgba(199,168,106,.24);
+  background:#080706;
+  padding:12px;
+  position:relative;
+  overflow:hidden;
+}
+.eden-map-stage{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#070605;
+}
+.eden-map-stage>img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  opacity:.95;
+}
+.eden-map-stage:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 0 80px rgba(0,0,0,.58);
+}
+.eden-map-marker{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  border:0;
+  background:transparent;
+  padding:0;
+  cursor:pointer;
+  z-index:4;
+}
+.eden-map-marker .dot{
+  width:13px;
+  height:13px;
+  display:block;
+  border-radius:50%;
+  border:1px solid rgba(239,226,195,.88);
+  background:#b99a59;
+  box-shadow:0 0 0 4px rgba(199,168,106,.11),0 0 13px rgba(199,168,106,.7);
+  transition:.18s ease;
+}
+.eden-map-marker .label{
+  position:absolute;
+  left:50%;
+  top:15px;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  font:700 7px var(--mono);
+  letter-spacing:.08em;
+  color:#d6c6a4;
+  text-shadow:0 2px 5px #000,0 0 8px #000;
+  opacity:.86;
+  pointer-events:none;
+}
+.eden-map-marker:hover .dot,
+.eden-map-marker.active .dot{
+  background:var(--red);
+  border-color:#f5dec5;
+  box-shadow:0 0 0 5px rgba(216,13,27,.15),0 0 18px rgba(216,13,27,.9);
+  transform:scale(1.15);
+}
+.eden-map-marker.active .label{color:#fff}
+
+.eden-s4-marker{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  z-index:3;
+}
+.eden-s4-marker .s4-ring{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  border:1px solid rgba(216,13,27,.9);
+  background:rgba(118,8,17,.28);
+  box-shadow:0 0 0 5px rgba(216,13,27,.08),0 0 22px rgba(216,13,27,.34);
+  display:grid;
+  place-items:center;
+  color:#f2d9bf;
+  font:800 6px var(--mono);
+}
+.eden-s4-marker .s4-label{
+  position:absolute;
+  left:50%;
+  top:27px;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  color:#d8bfa2;
+  font:700 7px var(--mono);
+  letter-spacing:.06em;
+  text-shadow:0 2px 6px #000,0 0 8px #000;
+}
+
+.eden-map-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  margin:11px 2px 0;
+  color:#7d766c;
+  font:600 8px var(--mono);
+  letter-spacing:.07em;
+}
+.eden-map-legend span{display:inline-flex;align-items:center;gap:6px}
+.eden-map-legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.eden-map-legend .apostle-key{background:#b99a59}
+.eden-map-legend .s4-key{background:var(--red)}
+
+.eden-map-side{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.eden-map-side-title{
+  font:700 8px var(--mono);
+  letter-spacing:.17em;
+  color:var(--gold);
+  padding:2px 2px 4px;
+}
+.eden-unmapped-card{
+  border:1px solid rgba(199,168,106,.2);
+  background:linear-gradient(145deg,rgba(199,168,106,.035),rgba(118,8,17,.04));
+  padding:14px;
+  cursor:pointer;
+  text-align:left;
+  color:var(--paper);
+}
+.eden-unmapped-card:hover,
+.eden-unmapped-card.active{
+  border-color:rgba(216,13,27,.58);
+  background:linear-gradient(145deg,rgba(118,8,17,.18),rgba(199,168,106,.05));
+}
+.eden-unmapped-card small{
+  display:block;
+  margin-bottom:5px;
+  color:#70695f;
+  font:700 7px var(--mono);
+  letter-spacing:.1em;
+}
+.eden-unmapped-card b{
+  display:block;
+  font:800 15px var(--serif);
+  color:var(--paper-light);
+}
+.eden-unmapped-card span{
+  display:block;
+  margin-top:5px;
+  color:#8b847b;
+  font-size:10px;
+  line-height:1.45;
+}
+
+.eden-map-info{
+  margin-top:14px;
+  border:1px solid rgba(199,168,106,.24);
+  background:linear-gradient(135deg,#0d0b0a,#080808);
+  min-height:160px;
+  padding:19px 21px;
+  position:relative;
+  overflow:hidden;
+}
+.eden-map-info:after{
+  content:"APOSTLE";
+  position:absolute;
+  right:-10px;
+  bottom:-22px;
+  color:rgba(199,168,106,.035);
+  font:900 68px/1 var(--serif);
+  pointer-events:none;
+}
+.eden-map-info-no{
+  color:var(--red);
+  font:700 8px var(--mono);
+  letter-spacing:.13em;
+}
+.eden-map-info h3{
+  margin:7px 0 13px;
+  font:900 28px/1 var(--serif);
+  letter-spacing:-.045em;
+}
+.eden-map-info-grid{
+  display:grid;
+  grid-template-columns:82px 1fr;
+  gap:0;
+  max-width:720px;
+  font-size:11px;
+}
+.eden-map-info-grid>div{
+  padding:7px 0;
+  border-top:1px solid rgba(199,168,106,.13);
+}
+.eden-map-info-grid .k{
+  color:#6e685f;
+  font:700 8px var(--mono);
+  letter-spacing:.08em;
+}
+.eden-map-info-grid .v{color:#bdb6ac}
+
+.eden-map-name-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:12px;
+}
+.eden-map-name-btn{
+  border:1px solid rgba(199,168,106,.17);
+  background:#0a0908;
+  color:#878078;
+  padding:6px 8px;
+  cursor:pointer;
+  font:700 8px var(--mono);
+  letter-spacing:.06em;
+}
+.eden-map-name-btn:hover,
+.eden-map-name-btn.active{
+  color:var(--paper-light);
+  border-color:rgba(216,13,27,.55);
+  background:rgba(118,8,17,.10);
+}
+
+@media(max-width:900px){
+  .eden-map-layout{grid-template-columns:1fr}
+  .eden-map-side{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+  }
+  .eden-map-side-title{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .eden-map-section{padding-top:54px!important}
+  .eden-map-shell{padding:6px}
+  .eden-map-stage{aspect-ratio:1.55/1}
+  .eden-map-marker .dot{width:11px;height:11px}
+  .eden-map-marker .label{display:none}
+  .eden-s4-marker .s4-ring{width:20px;height:20px}
+  .eden-s4-marker .s4-label{font-size:6px;top:22px}
+  .eden-map-side{grid-template-columns:1fr}
+  .eden-map-info{padding:16px}
+  .eden-map-info h3{font-size:23px}
+  .eden-map-info-grid{grid-template-columns:68px 1fr}
+}
+</style>
+
 </head>
 <body>
 
@@ -1577,6 +1833,83 @@ padding-bottom:58px;
               <b>EDEN은 고정된 군대식 계급조직이 아니다.</b> 공통된 것은 ‘계시현상을 의도적으로 발생시키고 이용한다’는 방향뿐이며, 각 사도는 서로 다른 방식과 이유로 움직인다. EVE의 실체를 직접 아는 조직원이 거의 없기 때문에 실질적인 충성·귀속의 대상은 수장보다 자신이 속한 계열의 <b>12사도</b>인 경우가 많다.
             </div>
           </article>
+        </div>
+      </div></section>
+
+
+      <section class="eden-map-section"><div class="wrap reveal">
+        <div class="section-head">
+          <div class="section-index">APOSTLES / TERRITORY</div>
+          <div>
+            <h2 class="section-title">활동 <em>지도</em></h2>
+            <p class="lead">EDEN의 12사도는 고정 분대가 아니라 각자의 활동권을 중심으로 독립적으로 움직인다. 아래 표시는 LAMB가 확인한 주요 활동권이며 실제 이동 범위와 일치하지 않을 수 있다. S4 휴거구역은 붉은 표식으로 별도 표시된다.</p>
+          </div>
+        </div>
+
+        <div class="eden-map-layout">
+          <div>
+            <div class="eden-map-shell">
+              <div class="eden-map-stage" id="edenWorldMap">
+                <img src="images/eden_world_map.png" alt="EDEN 사도 활동지와 S4 휴거구역 세계지도">
+
+                <!-- Apostles with known primary areas -->
+                <button class="eden-map-marker" data-apostle="2" style="left:48%;top:25%" type="button" aria-label="제2사도 안드레아"><span class="dot"></span><span class="label">02 ANDREA</span></button>
+                <button class="eden-map-marker" data-apostle="3" style="left:43%;top:35%" type="button" aria-label="제3사도 야코부스"><span class="dot"></span><span class="label">03 IACOBUS</span></button>
+                <button class="eden-map-marker" data-apostle="4" style="left:46%;top:42%" type="button" aria-label="제4사도 요하네스"><span class="dot"></span><span class="label">04 JOHANNES</span></button>
+                <button class="eden-map-marker" data-apostle="5" style="left:87%;top:69%" type="button" aria-label="제5사도 필리포스"><span class="dot"></span><span class="label">05 PHILIPPOS</span></button>
+                <button class="eden-map-marker" data-apostle="6" style="left:65%;top:42%" type="button" aria-label="제6사도 네이선"><span class="dot"></span><span class="label">06 NATHAN</span></button>
+                <button class="eden-map-marker" data-apostle="7" style="left:57%;top:54%" type="button" aria-label="제7사도 디디모스"><span class="dot"></span><span class="label">07 DIDYMUS</span></button>
+                <button class="eden-map-marker" data-apostle="8" style="left:45%;top:67%" type="button" aria-label="제8사도 마태오"><span class="dot"></span><span class="label">08 MATTEO</span></button>
+                <button class="eden-map-marker" data-apostle="9" style="left:82%;top:35%" type="button" aria-label="제9사도 알파이오스"><span class="dot"></span><span class="label">09 ALPHAEUS</span></button>
+                <button class="eden-map-marker" data-apostle="10" style="left:52%;top:45%" type="button" aria-label="제10사도 타데오스"><span class="dot"></span><span class="label">10 THADDAEUS</span></button>
+                <button class="eden-map-marker" data-apostle="11" style="left:42%;top:53%" type="button" aria-label="제11사도 시몬"><span class="dot"></span><span class="label">11 SIMON</span></button>
+                <button class="eden-map-marker" data-apostle="12" style="left:69%;top:76%" type="button" aria-label="제12사도 주다스"><span class="dot"></span><span class="label">12 JUDAS</span></button>
+
+                <!-- Existing S4 Rapture Zones -->
+                <div class="eden-s4-marker" style="left:51.5%;top:43.5%"><span class="s4-ring">S4</span><span class="s4-label">ISRAEL</span></div>
+                <div class="eden-s4-marker" style="left:57.5%;top:53.5%"><span class="s4-ring">S4</span><span class="s4-label">N. INDIA</span></div>
+                <div class="eden-s4-marker" style="left:78.5%;top:54.5%"><span class="s4-ring">S4</span><span class="s4-label">MEXICO</span></div>
+              </div>
+            </div>
+
+            <div class="eden-map-legend">
+              <span><i class="apostle-key"></i>APOSTLE / PRIMARY ACTIVITY</span>
+              <span><i class="s4-key"></i>S4 / RAPTURE ZONE</span>
+            </div>
+
+            <div class="eden-map-name-list" id="edenMapNameList"></div>
+
+            <article class="eden-map-info" id="edenMapInfo">
+              <div class="eden-map-info-no" id="edenMapInfoNo">SELECT / APOSTLE</div>
+              <h3 id="edenMapInfoName">사도를 선택하십시오</h3>
+              <div class="eden-map-info-grid">
+                <div class="k">활동지</div><div class="v" id="edenMapInfoArea">지도 표식 또는 이름을 선택하면 정보가 표시됩니다.</div>
+                <div class="k">역할</div><div class="v" id="edenMapInfoRole">—</div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="eden-map-side">
+            <div class="eden-map-side-title">UNFIXED / OUTSIDE TERRITORY</div>
+
+            <button class="eden-unmapped-card" type="button" data-apostle="eve">
+              <small>SUPREME / UNKNOWN</small>
+              <b>EVE / 이브</b>
+              <span>활동지 불명. EDEN의 수장.</span>
+            </button>
+
+            <button class="eden-unmapped-card" type="button" data-apostle="1">
+              <small>APOSTLE 01 / MOBILE</small>
+              <b>CEPHAS / 케파스</b>
+              <span>고정 활동지역 없음. 경계·통행·조율.</span>
+            </button>
+
+            <button class="eden-unmapped-card" type="button" data-apostle="13">
+              <small>APOSTLE 13 / UNKNOWN</small>
+              <b>MATTHIAS / 마티아스</b>
+              <span>활동지 및 역할 불명.</span>
+            </button>
+          </aside>
         </div>
       </div></section>
 
@@ -2398,6 +2731,63 @@ padding-bottom:58px;
   }catch{}
   restorePosition();
   ensureApi();
+})();
+</script>
+
+
+<script id="eden-map-interaction-script">
+(function(){
+  const data={
+    eve:{no:'SUPREME / EVE',name:'이브 (EVE)',area:'불명',role:'EDEN의 수장. 알려진 정보 없음.'},
+    1:{no:'APOSTLE 01',name:'케파스 (CEPHAS)',area:'고정 지역 없음',role:'경계 · 통행 · 조율'},
+    2:{no:'APOSTLE 02',name:'안드레아 (ANDREA)',area:'북유럽 및 러시아',role:'회수 · 수색'},
+    3:{no:'APOSTLE 03',name:'야코부스 (IACOBUS)',area:'서유럽',role:'의료 · 연구'},
+    4:{no:'APOSTLE 04',name:'요하네스 (JOHANNES)',area:'남유럽',role:'기록 · 정보 수집'},
+    5:{no:'APOSTLE 05',name:'필리포스 (PHILIPPOS)',area:'남미',role:'물자 공급 · 구호 활동'},
+    6:{no:'APOSTLE 06',name:'네이선 (NATHAN)',area:'동아시아',role:'처형 · 사체 처리'},
+    7:{no:'APOSTLE 07',name:'디디모스 (DIDYMUS)',area:'남아시아',role:'계시현상 검증 · 실험'},
+    8:{no:'APOSTLE 08',name:'마태오 (MATTEO)',area:'남아프리카',role:'재정 · 거래 · 조직 관리'},
+    9:{no:'APOSTLE 09',name:'알파이오스 (ALPHAEUS)',area:'북미',role:'잠입 · 장기 공작'},
+    10:{no:'APOSTLE 10',name:'타데오스 (THADDAEUS)',area:'서아시아',role:'포섭 · 신도 관리'},
+    11:{no:'APOSTLE 11',name:'시몬 (SIMON)',area:'북아프리카',role:'무력 · 봉기'},
+    12:{no:'APOSTLE 12',name:'주다스 (JUDAS)',area:'오세아니아',role:'내부 감찰 · 배신자 처리'},
+    13:{no:'APOSTLE 13',name:'마티아스 (MATTHIAS)',area:'불명',role:'불명'}
+  };
+
+  const infoNo=document.getElementById('edenMapInfoNo');
+  const infoName=document.getElementById('edenMapInfoName');
+  const infoArea=document.getElementById('edenMapInfoArea');
+  const infoRole=document.getElementById('edenMapInfoRole');
+  const list=document.getElementById('edenMapNameList');
+  if(!infoNo||!list)return;
+
+  const mapped=[2,3,4,5,6,7,8,9,10,11,12];
+  list.innerHTML=mapped.map(id=>`<button type="button" class="eden-map-name-btn" data-apostle="${id}">${String(id).padStart(2,'0')} ${data[id].name.split(' (')[0]}</button>`).join('');
+
+  function selectApostle(id){
+    const item=data[id];
+    if(!item)return;
+
+    document.querySelectorAll('[data-apostle]').forEach(el=>{
+      el.classList.toggle('active',String(el.dataset.apostle)===String(id));
+    });
+
+    infoNo.textContent=item.no;
+    infoName.textContent=item.name;
+    infoArea.textContent=item.area;
+    infoRole.textContent=item.role;
+
+    const info=document.getElementById('edenMapInfo');
+    if(info && window.innerWidth<600){
+      info.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  }
+
+  document.querySelectorAll('#edenWorldMap [data-apostle], .eden-map-side [data-apostle], #edenMapNameList [data-apostle]').forEach(btn=>{
+    btn.addEventListener('click',()=>selectApostle(btn.dataset.apostle));
+  });
+
+  selectApostle(2);
 })();
 </script>
 
