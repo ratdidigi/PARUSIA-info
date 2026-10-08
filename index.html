@@ -1390,8 +1390,8 @@ padding-bottom:58px;
 }
 .eden-map-marker .label{
   position:absolute;
-  left:50%;
-  top:15px;
+  left:calc(50% + var(--label-x,0px));
+  top:var(--label-y,15px);
   transform:translateX(-50%);
   white-space:nowrap;
   font:700 7px var(--mono);
@@ -1429,8 +1429,8 @@ padding-bottom:58px;
 }
 .eden-s4-marker .s4-label{
   position:absolute;
-  left:50%;
-  top:27px;
+  left:calc(50% + var(--s4-label-x,0px));
+  top:var(--s4-label-y,27px);
   transform:translateX(-50%);
   white-space:nowrap;
   color:#d8bfa2;
@@ -1854,21 +1854,21 @@ padding-bottom:58px;
 
                 <!-- Apostles with known primary areas -->
                 <button class="eden-map-marker" data-apostle="2" style="left:31.0%;top:25.0%" type="button" aria-label="제2사도 안드레아"><span class="dot"></span><span class="label">02 ANDREA</span></button>
-                <button class="eden-map-marker" data-apostle="3" style="left:17.5%;top:34.5%" type="button" aria-label="제3사도 야코부스"><span class="dot"></span><span class="label">03 IACOBUS</span></button>
-                <button class="eden-map-marker" data-apostle="4" style="left:23.5%;top:38.5%" type="button" aria-label="제4사도 요하네스"><span class="dot"></span><span class="label">04 JOHANNES</span></button>
+                <button class="eden-map-marker" data-apostle="3" style="left:17.5%;top:29.5%;--label-x:-18px;--label-y:15px;" type="button" aria-label="제3사도 야코부스"><span class="dot"></span><span class="label">03 IACOBUS</span></button>
+                <button class="eden-map-marker" data-apostle="4" style="left:23.5%;top:38.5%;--label-x:18px;--label-y:15px;" type="button" aria-label="제4사도 요하네스"><span class="dot"></span><span class="label">04 JOHANNES</span></button>
                 <button class="eden-map-marker" data-apostle="5" style="left:88.5%;top:68.5%" type="button" aria-label="제5사도 필리포스"><span class="dot"></span><span class="label">05 PHILIPPOS</span></button>
-                <button class="eden-map-marker" data-apostle="6" style="left:40.5%;top:41.5%" type="button" aria-label="제6사도 네이선"><span class="dot"></span><span class="label">06 NATHAN</span></button>
-                <button class="eden-map-marker" data-apostle="7" style="left:31.5%;top:49.5%" type="button" aria-label="제7사도 디디모스"><span class="dot"></span><span class="label">07 DIDYMUS</span></button>
+                <button class="eden-map-marker" data-apostle="6" style="left:40.5%;top:41.5%;--label-x:20px;--label-y:15px;" type="button" aria-label="제6사도 네이선"><span class="dot"></span><span class="label">06 NATHAN</span></button>
+                <button class="eden-map-marker" data-apostle="7" style="left:31.5%;top:49.5%;--label-x:30px;--label-y:-7px;" type="button" aria-label="제7사도 디디모스"><span class="dot"></span><span class="label">07 DIDYMUS</span></button>
                 <button class="eden-map-marker" data-apostle="8" style="left:17.0%;top:69.5%" type="button" aria-label="제8사도 마태오"><span class="dot"></span><span class="label">08 MATTEO</span></button>
                 <button class="eden-map-marker" data-apostle="9" style="left:76.5%;top:35.5%" type="button" aria-label="제9사도 알파이오스"><span class="dot"></span><span class="label">09 ALPHAEUS</span></button>
-                <button class="eden-map-marker" data-apostle="10" style="left:26.8%;top:44.5%" type="button" aria-label="제10사도 타데오스"><span class="dot"></span><span class="label">10 THADDAEUS</span></button>
-                <button class="eden-map-marker" data-apostle="11" style="left:18.5%;top:45.5%" type="button" aria-label="제11사도 시몬"><span class="dot"></span><span class="label">11 SIMON</span></button>
+                <button class="eden-map-marker" data-apostle="10" style="left:26.8%;top:44.5%;--label-x:34px;--label-y:-10px;" type="button" aria-label="제10사도 타데오스"><span class="dot"></span><span class="label">10 THADDAEUS</span></button>
+                <button class="eden-map-marker" data-apostle="11" style="left:18.5%;top:45.5%;--label-x:-20px;--label-y:14px;" type="button" aria-label="제11사도 시몬"><span class="dot"></span><span class="label">11 SIMON</span></button>
                 <button class="eden-map-marker" data-apostle="12" style="left:44.5%;top:74.0%" type="button" aria-label="제12사도 주다스"><span class="dot"></span><span class="label">12 JUDAS</span></button>
 
                 <!-- Existing S4 Rapture Zones -->
-                <div class="eden-s4-marker" style="left:24.6%;top:44.8%"><span class="s4-ring">S4</span><span class="s4-label">ISRAEL</span></div>
-                <div class="eden-s4-marker" style="left:31.7%;top:48.8%"><span class="s4-ring">S4</span><span class="s4-label">N. INDIA</span></div>
-                <div class="eden-s4-marker" style="left:77.5%;top:47.2%"><span class="s4-ring">S4</span><span class="s4-label">MEXICO</span></div>
+                <div class="eden-s4-marker" style="left:22.8%;top:44.8%;--s4-label-x:-28px;--s4-label-y:28px;"><span class="s4-ring">S4</span><span class="s4-label">ISRAEL</span></div>
+                <div class="eden-s4-marker" style="left:31.7%;top:48.8%;--s4-label-x:-28px;--s4-label-y:29px;"><span class="s4-ring">S4</span><span class="s4-label">N. INDIA</span></div>
+                <div class="eden-s4-marker" style="left:77.5%;top:47.2%;--s4-label-x:0px;--s4-label-y:27px;"><span class="s4-ring">S4</span><span class="s4-label">MEXICO</span></div>
               </div>
             </div>
 
