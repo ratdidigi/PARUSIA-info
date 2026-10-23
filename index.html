@@ -1604,6 +1604,62 @@ padding-bottom:58px;
 }
 </style>
 
+
+<style id="latest-editor-birthday-pair-style">
+/* EDITOR: 서식/이미지 도구를 한 덩어리로 상단 고정 */
+.editor-sticky-tools{
+  position:sticky;
+  top:0;
+  z-index:14;
+  background:#111;
+  box-shadow:0 8px 18px rgba(0,0,0,.24);
+}
+.editor-sticky-tools .rich-toolbar{
+  position:relative!important;
+  top:auto!important;
+  z-index:2!important;
+}
+.editor-sticky-tools .image-tools{
+  position:relative;
+  z-index:1;
+  margin:0;
+}
+.editor-sticky-tools .image-tools.active{
+  display:flex;
+}
+
+/* PAIR TO PAIR: Persona Maker와 동일 구조, 톤만 살짝 변경 */
+.persona-cta-stack{
+  display:grid;
+  gap:12px;
+}
+.persona-maker-link.pair-template-link{
+  border-color:rgba(166,184,151,.30);
+  background:
+    linear-gradient(90deg,rgba(50,66,56,.28),rgba(199,168,106,.055) 55%,rgba(255,255,255,.01));
+}
+.persona-maker-link.pair-template-link:hover{
+  border-color:rgba(205,218,191,.66);
+  background:
+    linear-gradient(90deg,rgba(50,66,56,.42),rgba(199,168,106,.085) 55%,rgba(255,255,255,.02));
+}
+.persona-maker-link.pair-template-link .persona-cross{
+  color:#9dab8c;
+}
+.persona-maker-link.pair-template-link small{
+  color:#8e9a84;
+}
+
+@media(max-width:600px){
+  .editor-sticky-tools{
+    top:0;
+  }
+  .persona-cta-stack{
+    gap:9px;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1658,7 +1714,7 @@ padding-bottom:58px;
 
       <section><div class="wrap reveal"><div class="section-head"><div class="section-index">04 / ARMAMENT</div><div><h2 class="section-title">대응 <em>병장</em></h2><p class="lead">현현체의 형태와 교리, 그리고 상대가 인간인지 여부에 따라 장비 체계가 달라진다.</p></div></div><div class="weapon-list"><div class="weapon"><div class="code">A-01</div><div class="weapon-image"><img src="images/world_2.png" alt="상용병기"></div><h3>상용병기</h3><p>현실의 총기·화기류. 물리적 실체를 가진 현현체와 인간 세력을 상대한다.</p></div><div class="weapon"><div class="code">A-02</div><div class="weapon-image"><img src="images/world_3.png" alt="성유물"></div><h3>성유물</h3><p>오래된 종교·민속적 물건이 계시현상과 접촉하면서 특성을 획득한 희귀 장비. 물리적 실체가 없는 현현체에 사용되며 상부 허가가 필요하다.</p></div><div class="weapon"><div class="code">A-03</div><div class="weapon-image"><img src="images/world_4.png" alt="교리병장"></div><h3>교리병장</h3><p>Dogmatic Armament. LAMB가 제작한 대괴이 전용 인공병기. 성구탄, 봉인사슬, 장례검, 종 등 다양한 형태를 가진다.</p></div></div></div></section>
 
-      <section class="persona-cta"><div class="wrap reveal"><a class="persona-maker-link" href="https://ratdidigi.github.io/PARUSIA-persona-maker/" target="_blank" rel="noopener noreferrer"><span class="persona-cross">✦</span><span><small>EXTERNAL ARCHIVE TOOL</small><strong>PERSONA MAKER</strong><em>캐릭터 프로필을 생성하러 이동 ↗</em></span><span class="persona-arrow">→</span></a></div></section>
+      <section class="persona-cta"><div class="wrap reveal persona-cta-stack"><a class="persona-maker-link" href="https://ratdidigi.github.io/PARUSIA-persona-maker/" target="_blank" rel="noopener noreferrer"><span class="persona-cross">✦</span><span><small>EXTERNAL ARCHIVE TOOL</small><strong>PERSONA MAKER</strong><em>캐릭터 프로필을 생성하러 이동 ↗</em></span><span class="persona-arrow">→</span></a><a class="persona-maker-link pair-template-link" href="https://ratdidigi.github.io/PARUSIA_pairtopair/" target="_blank" rel="noopener noreferrer"><span class="persona-cross">✦</span><span><small>EXTERNAL ARCHIVE TOOL</small><strong>PAIR TO PAIR TEMPLATE</strong><em>캐릭터 페어 템플릿을 작성하러 이동 ↗</em></span><span class="persona-arrow">→</span></a></div></section>
     </main>
 
     <!-- LAMB PAGE -->
@@ -1954,7 +2010,7 @@ padding-bottom:58px;
 </div>
 <div class="profile-gallery-wrap"><div class="profile-gallery-head"><div class="profile-gallery-title">ASSET GALLERY</div><div class="profile-gallery-count" id="profileGalleryCount">0 ASSETS</div></div><div class="profile-gallery" id="profileGallery"></div></div></div></div>
   <div class="modal" id="loginModal"><div class="modal-box"><div class="modal-head"><h3>ADMIN ACCESS</h3><button class="close" data-close="loginModal">×</button></div><div class="field"><label>EMAIL</label><input type="email" id="adminEmail" placeholder="admin@example.com" autocomplete="username"></div><div class="field"><label>PASSWORD</label><input type="password" id="adminPassword" placeholder="password" autocomplete="current-password"></div><button class="primary-btn" id="loginSubmit">LOGIN</button><div class="notice">Supabase Auth 관리자 계정으로 로그인한다. 비밀번호는 HTML에 저장되지 않는다.</div></div></div>
-  <div class="modal" id="postModal"><div class="modal-box editor-box"><div class="modal-head"><div><div class="tag">ARCHIVE EDITOR</div><h3 id="postModalTitle">NEW POST</h3></div><button class="close" data-close="postModal">×</button></div><div class="editor-grid"><div class="field"><label>TITLE</label><input id="postTitle" placeholder="제목"></div><div class="field"><label>CATEGORY</label><select id="postCategory"><option value="notice">NOTICE</option><option value="character">CHARACTER</option><option value="etc">ETC</option></select></div></div><div class="field"><label>CONTENT</label><div class="rich-toolbar" id="richToolbar"><select id="fontName" title="폰트"><option value="Noto Sans KR">Sans</option><option value="Pretendard">Pretendard</option><option value="Noto Serif KR">Serif</option><option value="IBM Plex Mono">Mono</option></select><select id="fontSize" title="글자 크기"><option value="3">보통</option><option value="2">작게</option><option value="4">크게</option><option value="5">더 크게</option></select><span class="sep"></span><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="underline"><u>U</u></button><button type="button" data-cmd="strikeThrough"><s>S</s></button><span class="sep"></span><button type="button" data-block="h2">H2</button><button type="button" data-block="h3">H3</button><button type="button" data-block="blockquote">❝</button><button type="button" data-block="p">P</button><span class="sep"></span><button type="button" data-cmd="insertUnorderedList">• LIST</button><button type="button" data-cmd="insertOrderedList">1. LIST</button><button type="button" data-cmd="justifyLeft">L</button><button type="button" data-cmd="justifyCenter">C</button><button type="button" data-cmd="justifyRight">R</button><span class="sep"></span><button type="button" id="linkBtn">LINK</button><button type="button" id="imageBtn">IMAGE</button><input type="file" id="imageInput" accept="image/*" multiple hidden><span class="upload-state" id="uploadState">READY</span></div><div class="image-tools" id="imageTools"><span class="tool-label">IMAGE TOOLS</span><button type="button" data-img-align="left">LEFT</button><button type="button" data-img-align="center">CENTER</button><button type="button" data-img-align="right">RIGHT</button><button type="button" data-img-align="full">FULL</button><span class="sep"></span><button type="button" data-img-size="sm">S</button><button type="button" data-img-size="md">M</button><button type="button" data-img-size="lg">L</button><button type="button" data-img-size="full">100%</button><span class="sep"></span><button type="button" id="captionBtn">CAPTION</button><button type="button" id="removeImageBtn">REMOVE</button></div><div class="rich-editor" id="postEditor" contenteditable="true" data-placeholder="내용을 작성하세요. 이미지·제목·인용·목록 등을 사용할 수 있습니다."></div></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px"><button class="ghost-btn" type="button" id="clearFormat">CLEAR FORMAT</button><button class="primary-btn" id="savePost">PUBLISH</button></div></div></div>
+  <div class="modal" id="postModal"><div class="modal-box editor-box"><div class="modal-head"><div><div class="tag">ARCHIVE EDITOR</div><h3 id="postModalTitle">NEW POST</h3></div><button class="close" data-close="postModal">×</button></div><div class="editor-grid"><div class="field"><label>TITLE</label><input id="postTitle" placeholder="제목"></div><div class="field"><label>CATEGORY</label><select id="postCategory"><option value="notice">NOTICE</option><option value="character">CHARACTER</option><option value="etc">ETC</option></select></div></div><div class="field"><label>CONTENT</label><div class="editor-sticky-tools"><div class="rich-toolbar" id="richToolbar"><select id="fontName" title="폰트"><option value="Noto Sans KR">Sans</option><option value="Pretendard">Pretendard</option><option value="Noto Serif KR">Serif</option><option value="IBM Plex Mono">Mono</option></select><select id="fontSize" title="글자 크기"><option value="3">보통</option><option value="2">작게</option><option value="4">크게</option><option value="5">더 크게</option></select><span class="sep"></span><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="underline"><u>U</u></button><button type="button" data-cmd="strikeThrough"><s>S</s></button><span class="sep"></span><button type="button" data-block="h2">H2</button><button type="button" data-block="h3">H3</button><button type="button" data-block="blockquote">❝</button><button type="button" data-block="p">P</button><span class="sep"></span><button type="button" data-cmd="insertUnorderedList">• LIST</button><button type="button" data-cmd="insertOrderedList">1. LIST</button><button type="button" data-cmd="justifyLeft">L</button><button type="button" data-cmd="justifyCenter">C</button><button type="button" data-cmd="justifyRight">R</button><span class="sep"></span><button type="button" id="linkBtn">LINK</button><button type="button" id="imageBtn">IMAGE</button><input type="file" id="imageInput" accept="image/*" multiple hidden><span class="upload-state" id="uploadState">READY</span></div><div class="image-tools" id="imageTools"><span class="tool-label">IMAGE TOOLS</span><button type="button" data-img-align="left">LEFT</button><button type="button" data-img-align="center">CENTER</button><button type="button" data-img-align="right">RIGHT</button><button type="button" data-img-align="full">FULL</button><span class="sep"></span><button type="button" data-img-size="sm">S</button><button type="button" data-img-size="md">M</button><button type="button" data-img-size="lg">L</button><button type="button" data-img-size="full">100%</button><span class="sep"></span><button type="button" id="captionBtn">CAPTION</button><button type="button" id="removeImageBtn">REMOVE</button></div></div><div class="rich-editor" id="postEditor" contenteditable="true" data-placeholder="내용을 작성하세요. 이미지·제목·인용·목록 등을 사용할 수 있습니다."></div></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px"><button class="ghost-btn" type="button" id="clearFormat">CLEAR FORMAT</button><button class="primary-btn" id="savePost">PUBLISH</button></div></div></div>
   <div class="modal" id="articleModal"><div class="modal-box article-box"><div class="modal-head"><div class="tag">ARCHIVE RECORD</div><button class="close" data-close="articleModal">×</button></div><div class="article-header"><div class="post-cat" id="articleCat">NOTICE</div><h2 id="articleTitle">TITLE</h2><div class="article-meta" id="articleMeta"></div>
 <div id="articleAdminActions" style="display:none;gap:8px;margin-top:16px">
   <button class="primary-btn" type="button" id="articleEditBtn">EDIT</button>
@@ -1997,7 +2053,7 @@ padding-bottom:58px;
     // 새 프로필을 배열에 객체 하나만 추가하면 카드/슬롯 수가 자동으로 늘어남.
     const LAMB_MEMBERS=[
       {
-        codename:'SABLE',name:'율리안 바이스 Julian Weiss',age:'33',department:'EDEN 전담반',rank:'섹션 치프',
+        codename:'SABLE',name:'율리안 바이스 Julian Weiss',age:'33',birthday:'6월 6일',department:'EDEN 전담반',rank:'섹션 치프',
         nationality:'오스트리아 / 빈',role:'현장 지휘 · 작전 통솔. 모든 범위를 커버하는 올라운더 플렉시블 요원.',
         weapon:'범용 카빈 및 돌격소총. 보조권총. 교리병장 나이프.',languages:'영어 / 라틴어 / 독일어',
         features:'191cm. 백발 하이 포니테일, 분홍색 눈. 나른하고 권태로운 인상.',
@@ -2007,7 +2063,7 @@ padding-bottom:58px;
         image:'images/profile_sable.png',gallery:['images/thumbnail_sable.png']
       },
       {
-        codename:'ASTRA',name:'노아 캘러한 Noah Callahan',age:'27',department:'EDEN 전담반',rank:'선임 요원',
+        codename:'ASTRA',name:'노아 캘러한 Noah Callahan',age:'27',birthday:'10월 7일',department:'EDEN 전담반',rank:'선임 요원',
         nationality:'미국 / 캘리포니아',role:'매복 · 정찰 · 장거리 지원',
         weapon:'지정사수소총 및 권총 사용. 별도의 교리병장 할당 무기 없음.',languages:'영어 / 라틴어',
         features:'187cm. 금발 울프컷, 민트색 눈. 왼쪽 다리를 현현체로 대체해 평소 은닉.',
@@ -2017,7 +2073,7 @@ padding-bottom:58px;
         image:'images/profile_astra.png',gallery:['images/thumbnail_astra.png']
       },
       {
-        codename:'ORDO',name:'에밀 마이어 Emil Meier',age:'23',department:'EDEN 전담반',rank:'신입 요원',
+        codename:'ORDO',name:'에밀 마이어 Emil Meier',age:'23',birthday:'2월 28일',department:'EDEN 전담반',rank:'신입 요원',
         nationality:'스위스 / 베른',role:'현장 지원 · 교리 대응',
         weapon:'권총 및 교리병장-성탄건 사용(강한 빛을 터트려 시야를 방해하는 총기)',languages:'영어 / 라틴어 / 독일어',
         features:'188cm. 베이지 브라운 숏컷, 옅은 푸른 눈. 초연하고 엄격한 성향.',
@@ -2027,7 +2083,7 @@ padding-bottom:58px;
         image:'images/profile_ordo.png',gallery:['images/thumbnail_ordo.png']
       },
       {
-        codename:'CAIN',name:'정우진 鄭宇鎭/穽雨燼',age:'27',department:'EDEN 전담반',rank:'선임 요원',
+        codename:'CAIN',name:'정우진 鄭宇鎭/穽雨燼',age:'27',birthday:'4월 14일',department:'EDEN 전담반',rank:'선임 요원',
         nationality:'대한민국 / 서울',role:'현장 전투 · 추적',
         weapon:'초장거리 저격소총 및 성유물로 등록된 활 사용.',languages:'영어 / 라틴어 / 한국어',
         features:'184cm. 흑발, 회색 눈, 왼쪽 눈 안대. 유쾌하고 느긋한 태도.',
@@ -2037,7 +2093,7 @@ padding-bottom:58px;
         image:'images/profile_cain.png',gallery:['images/thumbnail_cain.png']
       },
       {
-        codename:'MORI',name:'쿠로사와 렌지 黒沢 蓮司',age:'29',department:'현현체처리반',rank:'섹션 치프',
+        codename:'MORI',name:'쿠로사와 렌지 黒沢 蓮司',age:'29',birthday:'—',department:'현현체처리반',rank:'섹션 치프',
         nationality:'일본 / 나가노현',role:'현장 조사 · 토착신앙/의례 분석',
         weapon:'단축 산탄총 카빈, 오래된 신목 가지를 가공한 단도형 성유물.',languages:'영어 / 라틴어 / 일본어',
         features:'188cm. 긴 땋은 흑발. 음침하고 말이 더딘 편. 사람보다 장소와 습관을 먼저 관찰하는 현장형.',
@@ -2047,7 +2103,7 @@ padding-bottom:58px;
         image:'images/profile_mori.png',gallery:['images/thumbnail_mori.png']
       },
       {
-        codename:'NAGA',name:'나린 찬타라 Narin Chantara',age:'25',department:'현현체처리반',rank:'선임 요원',
+        codename:'NAGA',name:'나린 찬타라 Narin Chantara',age:'25',birthday:'8월 29일',department:'현현체처리반',rank:'선임 요원',
         nationality:'태국 / 농카이',role:'현장 조사 · 현장 안정화 · 경계 설정',
         weapon:'컴팩트 기관단총 / 보조 권총 / 성유물 단봉',
         languages:'영어 / 라틴어 / 태국어',
@@ -2061,7 +2117,7 @@ padding-bottom:58px;
 
     const EDEN_MEMBERS=[
       {
-        codename:'NATHAN',name:'린슈위안(林修远)',age:'-',department:'EDEN',rank:'제6사도',
+        codename:'NATHAN',name:'린슈위안(林修远)',age:'-',birthday:'—',department:'EDEN',rank:'제6사도',
         nationality:'동아시아',role:'처형 및 사체 처리.',
         weapon:'도축용 대형 칼.',languages:'영어, 보통화, 광동어 / 히브리어, 아랍어 등 중동 계열의 언어들',
         features:'190cm. 짙은 남색의 긴 머리칼과 삐죽삐죽 튀어나온 반묶음 머리. 처지고 안광이 없는 연보라색 눈. ',
@@ -2071,7 +2127,7 @@ padding-bottom:58px;
         image:'images/profile_nathan.png',gallery:[]
       },
       {
-        codename:'ANDREA',name:'-',age:'-',department:'EDEN',rank:'제2사도',
+        codename:'ANDREA',name:'-',age:'-',birthday:'—',department:'EDEN',rank:'제2사도',
         nationality:'북유럽 및 러시아',role:'회수/수색.',
         weapon:'창 형태의 성유물과 언령',languages:'영어, 러시아어 / 히브리어, 아랍어 등 중동 계열의 언어들',
         features:'188cm. 하얀색의 짧은 머리칼, 눈을 살짝 가리는 앞머리. 처지고 푸른 눈. 풍성한 속눈썹. 조용하고 차분한 분위기. 탄탄한 체형과 근육. 초겨울의 산뜻한 체향.',
@@ -2109,7 +2165,7 @@ padding-bottom:58px;
       document.getElementById('profileCode').textContent=p.codename;
       const photo=document.getElementById('profilePhoto');
       photo.innerHTML=p.image?`<img src="${p.image}" alt="${p.codename}">`:'PORTRAIT / EMPTY';
-      const rows=[['코드네임',p.codename],['이름',p.name],['나이',p.age],['소속부서',p.department],['직급',p.rank],['국적',p.nationality],['역할',p.role],['사용 무기',p.weapon],['구사언어',p.languages],['특징',p.features],['링크',p.link||'—'],['프롬프트',p.prompt||'—']];
+      const rows=[['코드네임',p.codename],['이름',p.name],['나이',p.age],['생일',p.birthday||'—'],['소속부서',p.department],['직급',p.rank],['국적',p.nationality],['역할',p.role],['사용 무기',p.weapon],['구사언어',p.languages],['특징',p.features],['링크',p.link||'—'],['프롬프트',p.prompt||'—']];
       document.getElementById('profileTable').innerHTML=rows.map(([k,v])=>{
         if(k==='이름'){
           return `<div class="pk">${k}</div><div class="pv"><div class="profile-name-wrap" id="profileNameWrap"><button class="profile-name-toggle" id="profileNameToggle" type="button" aria-expanded="false">RESTRICTED / 열기</button><span class="profile-name-value">${escapeHtml(v||'—')}</span></div></div>`;
